@@ -1,0 +1,64 @@
+{
+  "name": "arbox-api",
+  "version": "1.0.0",
+  "description": "an api for arbox app",
+  "main": "dist/index.js",
+  "author": "Pavel 'PK' Kaminsky <kaminsky.pavel@gmail.com> (http://www.pavel-kaminsky.com)",
+  "license": "ISC",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node-dev src/server.ts",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:eslint": "eslint src/**/*.ts --fix",
+    "lint:prettier": "prettier --config .prettierrc --write src/**/*.{ts,js,json}",
+    "jscpd": "jscpd",
+    "checkLicenses": "jsgl --local .",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "swagger": "swagger-jsdoc -d .swagger.js src/routes/*.ts",
+    "prepush": "npm run build"
+  },
+  "homepage": "www.pavel-kaminsky.com",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.0.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.22.2",
+    "query-string": "^6.14.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "8.2.0",
+    "@types/lodash": "4.14.168",
+    "@types/node": "14.14.31",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "cross-env": "7.0.3",
+    "eslint": "7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "husky": "=4",
+    "jest": "26.6.3",
+    "lint-staged": "^10.5.4",
+    "prettier": "2.2.1",
+    "ts-jest": "26.5.2",
+    "ts-node-dev": "1.1.1",
+    "typescript": "4.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaminskypavel/arbox-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kaminskypavel/arbox-api/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
+  }
+}
