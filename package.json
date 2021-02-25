@@ -1,5 +1,5 @@
 {
-  "name": "@kaminskypavel/arbox-api",
+  "name": "arbox-api",
   "version": "0.0.0-development",
   "description": "an api for arbox app",
   "main": "dist/index.js",
