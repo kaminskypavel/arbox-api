@@ -1,8 +1,9 @@
 {
-  "name": "arbox-api",
-  "version": "1.0.0",
+  "name": "@kaminskypavel/arbox-api",
+  "version": "0.0.0-development",
   "description": "an api for arbox app",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "author": "Pavel 'PK' Kaminsky <kaminsky.pavel@gmail.com> (http://www.pavel-kaminsky.com)",
   "license": "ISC",
   "scripts": {
@@ -14,7 +15,9 @@
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepush": "npm run build"
+    "prepush": "npm run build",
+    "prepublish": "tsc",
+    "semantic-release": "semantic-release"
   },
   "homepage": "www.pavel-kaminsky.com",
   "dependencies": {
@@ -31,6 +34,7 @@
     "@types/node": "14.14.31",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
+    "commitizen": "^4.2.3",
     "cross-env": "7.0.3",
     "eslint": "7.20.0",
     "eslint-config-airbnb-base": "^14.2.1",
@@ -40,13 +44,15 @@
     "jest": "26.6.3",
     "lint-staged": "^10.5.4",
     "prettier": "2.2.1",
+    "semantic-release": "^17.3.9",
+    "semantic-release-cli": "^5.4.3",
     "ts-jest": "^26.5.2",
     "ts-node-dev": "1.1.1",
     "typescript": "4.2.2"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaminskypavel/arbox-api.git"
+    "url": "https://github.com/kaminskypavel/arbox-api.git"
   },
   "bugs": {
     "url": "https://github.com/kaminskypavel/arbox-api/issues"
