@@ -4,13 +4,16 @@ describe('ArBoxAppConnection', () => {
   const arboxConnetion = new ArBoxAppConnection({
     boxId: 224,
     boxName: 'CrossFitPanda',
-    username: 'dummy-username',
+    token: '',
+    email: 'dummy-username',
     password: 'dummy-password',
   });
 
   describe('#connect', () => {
     it('should fail to connect with wrong credentials', async () => {
-      await expect(arboxConnetion.generateSessionToken()).rejects.toThrowError("cant login with your credentials : Error: Request failed with status code 400");
+      await expect(arboxConnetion.generateSessionToken()).rejects.toThrowError(
+        'cant login with your credentials : Error: Request failed with status code 400'
+      );
     });
   });
 

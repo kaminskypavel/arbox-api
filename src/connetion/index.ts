@@ -1,21 +1,23 @@
-import axios, { Method } from 'axios';
+import axios, {Method} from 'axios';
 import * as _ from 'lodash';
 
 export interface IArBoxAppConfig {
   boxId: number;
   boxName: string;
-  username?: string;
-  password?: string;
-  jwtSessionToken?: string;
+  email: string;
+  password: string;
+  token: string;
 }
 
 export default class ArBoxAppConnection {
   config: IArBoxAppConfig;
+  token: string;
   debug: boolean;
   demoMode: boolean;
 
   constructor(config: IArBoxAppConfig, debug = true, demoMode = false) {
     this.config = config;
+    this.token = config.token ?? '';
     this.debug = debug;
     this.demoMode = demoMode;
   }
@@ -25,28 +27,31 @@ export default class ArBoxAppConnection {
       console.log('[Debug] serverRequest :: ', method, url, data);
     }
 
+    const accesstoken = this.token;
+    console.log(url, method, data);
+
     if (!this.demoMode) {
       return axios({
         url,
         method,
         data,
         headers: {
-          accessToken: this.config.jwtSessionToken ?? "",
-          boxFK: this.config.boxId,
+          boxfk: this.config.boxId,
+          accesstoken,
           'User-Agent': this.config.boxName,
           Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json;charset=UTF-8',
           Host: 'api.arboxapp.com',
-          Origin: 'https://manage.arboxapp.com',
+          Origin: 'https://panel.arboxapp.com',
         },
       });
     }
 
     console.log(
-      '[Debug] serverRequest :: DEMO MODE! skipping a real server call',
+      '[Debug] serverRequest :: DEMO MODE! skipping a real server call'
     );
 
-    return Promise.resolve({ data: 'demo data' });
+    return Promise.resolve({data: 'demo data'});
   }
 
   async isConnected(): Promise<boolean> {
@@ -57,7 +62,7 @@ export default class ArBoxAppConnection {
     try {
       const serverData = await this.serverRequest(
         `https://api.arboxapp.com/index.php/api/v1/notifications/byBox/${this.config.boxId}?page=1`,
-        'get',
+        'get'
       );
 
       const res = !_.isNil(_.get(serverData, 'data'));
@@ -77,13 +82,21 @@ export default class ArBoxAppConnection {
   }
 
   async generateSessionToken() {
+    console.log({
+      email: this.config.email,
+      password: this.config.password,
+    });
+
+    // if previos token isnt working its either errorneous or broken
+    this.token = "";
+
     const serverData = await this.serverRequest(
-      `https://api.arboxapp.com/index.php/api/v1/user/${this.config.username}/session`,
+      `https://api.arboxapp.com/index.php/api/v1/user/${this.config.email}/session`,
       'POST',
       {
-        email: this.config.username,
+        email: this.config.email,
         password: this.config.password,
-      },
+      }
     ).catch((e) => {
       throw new Error(`cant login with your credentials : ${e}`);
     });
@@ -99,7 +112,7 @@ export default class ArBoxAppConnection {
   async forceConnection() {
     const isConnected = await this.isConnected();
     if (!isConnected) {
-      await this.generateSessionToken();
+      this.token = await this.generateSessionToken();
     }
   }
 }

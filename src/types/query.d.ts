@@ -1,4 +1,4 @@
-interface CustomerResult {
+export interface CustomerResult {
     user_fk: number;
     rivhit_customer_id: string;
     image_public_id_cloudinary?: any;
@@ -17,7 +17,7 @@ interface CustomerResult {
     full_path_image_user: string;
 }
 
-interface LeadResult {
+export interface LeadResult {
     id: number;
     email: string;
     phone: string;
@@ -26,4 +26,4 @@ interface LeadResult {
     type: string;
 }
 
-type SearchQueryResult = Array<LeadResult | CustomerResult>;
+export type SearchQueryResult = Array<LeadResult | CustomerResult>;
