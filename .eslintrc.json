@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": [
     "airbnb-base"
@@ -18,6 +19,9 @@
     "camelcase": "off",
     "no-console": "off",
     "lines-between-class-members": "off",
-    "no-trailing-spaces": "off"
+    "no-trailing-spaces": "off",
+    "quotes": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
   }
 }
