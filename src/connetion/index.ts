@@ -28,7 +28,6 @@ export default class ArBoxAppConnection {
     }
 
     const accesstoken = this.token;
-    console.log(url, method, data);
 
     if (!this.demoMode) {
       return axios({
