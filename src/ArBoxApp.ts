@@ -12,6 +12,7 @@ import {
 } from './types/arbox';
 import {SearchQueryResult} from './types/query';
 import {Reports} from './types/reports';
+import {Customers} from './types/customers';
 
 config();
 
@@ -101,7 +102,7 @@ export default class ArBoxApp {
     return dataReq.data;
   }
 
-  async getAllCustomersExtraDataDump(): Promise<string> {
+  async getAllCustomersExtraDataDump(): Promise<Customers.ExtraData> {
     const conn = await this.ensureConnection();
     const dataReq = await conn.serverRequest(
       `https://api.arboxapp.com/index.php/api/v1/user/${this.connection.config.boxId}/extraData/`,
