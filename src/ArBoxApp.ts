@@ -11,6 +11,7 @@ import {
   Schedule,
 } from './types/arbox';
 import {SearchQueryResult} from './types/query';
+import {Reports} from './types/reports';
 
 config();
 
@@ -24,7 +25,6 @@ export default class ArBoxApp {
     email: string,
     password: string
   ) {
-
     this.connection = new ArBoxAppConnection({
       boxId,
       boxName,
@@ -348,6 +348,16 @@ export default class ArBoxApp {
       )}`,
       'GET'
     );
+    return data;
+  }
+
+  async getMembersProperties(): Promise<Reports.MemberProperties> {
+    const conn = await this.ensureConnection();
+    const {data} = await conn.serverRequest(
+      `https://api.arboxapp.com/index.php/api/v1/box/226/checkboxesUserBox`,
+      'POST'
+    );
+
     return data;
   }
 
