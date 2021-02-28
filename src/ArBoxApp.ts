@@ -102,7 +102,7 @@ export default class ArBoxApp {
     return dataReq.data;
   }
 
-  async getAllCustomersExtraDataDump(): Promise<Customers.ExtraData> {
+  async getAllCustomersExtraDataDump(): Promise<Customers.ExtraData[]> {
     const conn = await this.ensureConnection();
     const dataReq = await conn.serverRequest(
       `https://api.arboxapp.com/index.php/api/v1/user/${this.connection.config.boxId}/extraData/`,
@@ -356,7 +356,7 @@ export default class ArBoxApp {
     return data;
   }
 
-  async getMembersProperties(): Promise<Reports.MemberProperties> {
+  async getMembersProperties(): Promise<Reports.MemberProperties[]> {
     const conn = await this.ensureConnection();
     const {data} = await conn.serverRequest(
       `https://api.arboxapp.com/index.php/api/v1/box/226/checkboxesUserBox`,
