@@ -17,7 +17,7 @@ config();
     ARBOX_BOX_NAME,
     ARBOX_SESSION_JWT,
     ARBOX_EMAIL,
-    ARBOX_PASSWORD
+    ARBOX_PASSWORD,
   );
 
   const res = await arbox.getMembersProperties();

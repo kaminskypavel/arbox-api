@@ -23,15 +23,19 @@ export default class ArBoxApp {
     boxName: string,
     token: string,
     email: string,
-    password: string
+    password: string,
+    debug = false
   ) {
-    this.connection = new ArBoxAppConnection({
-      boxId,
-      boxName,
-      token,
-      email,
-      password,
-    });
+    this.connection = new ArBoxAppConnection(
+      {
+        boxId,
+        boxName,
+        token,
+        email,
+        password,
+      },
+      debug
+    );
   }
 
   async getAllCustomers(): Promise<string> {

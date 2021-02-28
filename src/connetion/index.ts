@@ -1,7 +1,7 @@
 import axios, {Method} from 'axios';
 import * as _ from 'lodash';
 
-export interface IArBoxAppConfig {
+export interface IArBoxConnectionConfig {
   boxId: number;
   boxName: string;
   email: string;
@@ -10,12 +10,12 @@ export interface IArBoxAppConfig {
 }
 
 export default class ArBoxAppConnection {
-  config: IArBoxAppConfig;
+  config: IArBoxConnectionConfig;
   token: string;
   debug: boolean;
   demoMode: boolean;
 
-  constructor(config: IArBoxAppConfig, debug = true, demoMode = false) {
+  constructor(config: IArBoxConnectionConfig, debug = true, demoMode = false) {
     this.config = config;
     this.token = config.token ?? '';
     this.debug = debug;
