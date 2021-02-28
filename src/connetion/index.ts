@@ -81,11 +81,6 @@ export default class ArBoxAppConnection {
   }
 
   async generateSessionToken() {
-    console.log({
-      email: this.config.email,
-      password: this.config.password,
-    });
-
     // if previos token isnt working its either errorneous or broken
     this.token = "";
 
