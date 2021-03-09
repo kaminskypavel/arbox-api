@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 
 export interface IArBoxConnectionConfig {
   boxId: number;
+  locationId: number;
   boxName: string;
   email: string;
   password: string;

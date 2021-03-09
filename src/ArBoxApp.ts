@@ -8,11 +8,11 @@ import {
   EnedeMembership,
   Lead,
   LeadExtended,
-  Schedule,
 } from './types/arbox';
 import {SearchQueryResult} from './types/query';
 import {Reports} from './types/reports';
 import {Customers} from './types/customers';
+import {Schedule} from './types/schedule';
 
 config();
 
@@ -22,6 +22,7 @@ export default class ArBoxApp {
   constructor(
     boxId: number,
     boxName: string,
+    locationId: number,
     token: string,
     email: string,
     password: string,
@@ -30,10 +31,11 @@ export default class ArBoxApp {
     this.connection = new ArBoxAppConnection(
       {
         boxId,
+        locationId,
         boxName,
         token,
         email,
-        password,
+        password
       },
       debug
     );
@@ -96,7 +98,7 @@ export default class ArBoxApp {
       {
         fromDate,
         toDate,
-        ended: true,
+        ended: true
       }
     );
     return dataReq.data;
@@ -172,7 +174,7 @@ export default class ArBoxApp {
         locationBoxFk,
         phone,
         source,
-        status,
+        status
       }
     );
     return dataReq.data;
@@ -220,7 +222,7 @@ export default class ArBoxApp {
       boxId: this.connection.config.boxId,
       comment,
       leadId,
-      newStatus,
+      newStatus
     };
 
     const {data} = await conn.serverRequest(
@@ -252,13 +254,13 @@ export default class ArBoxApp {
         isNotified: 0,
         reminderDate: moment().format('YYYY-MM-DDTHH:MM:00.259Z'),
         reminder: {
-          reminderDate: moment(reminderDate).format('YYYY-MM-DDTHH:MM:00.259Z'),
+          reminderDate: moment(reminderDate).format('YYYY-MM-DDTHH:MM:00.259Z')
         },
         targetableId: userId,
         targetableType: 'user',
         taskType,
         reminderTime: moment(reminderDate).format('YYYY-MM-DDTHH:MM:00.259Z'),
-        taskOwnerUserFk: 56841,
+        taskOwnerUserFk: 56841
       }
     );
     return data;
@@ -279,7 +281,7 @@ export default class ArBoxApp {
           toDate,
           tabType: 'allTasks',
           filterByTask: null,
-          filterByLocationBox: null,
+          filterByLocationBox: null
         }
       );
       return res.data;
@@ -288,7 +290,7 @@ export default class ArBoxApp {
     let page = 0;
     let pageResults: Arbox.Tasks | null;
     const allResults: Arbox.Tasks = {
-      allTasks: [],
+      allTasks: []
     };
 
     do {
@@ -310,27 +312,37 @@ export default class ArBoxApp {
       'post',
       {
         fromDate: moment(from).format('YYYY-MM-DD'),
-        toDate: moment(to).format('YYYY-MM-DD'),
+        toDate: moment(to).format('YYYY-MM-DD')
       }
     );
     return data;
   }
 
+  /**
+   * @DEPRECATED use "getSchedule" instead
+   * @param fromDate
+   * @param toDate
+   * @param location
+   */
+
+  // https://api.arboxapp.com/index.php/api/v1/rangeSchedule/226?fromDate=2021-03-14&toDate=2021-03-21&location=282&coach=undefined&schedule=undefined
   async getLessons(
     fromDate: Date | string,
-    toDate: Date | string,
-    location = this.connection.config.boxId
-  ): Promise<Schedule.Lesson> {
+    toDate: Date | string
+  ): Promise<Schedule.ScheduleLesson> {
     const conn = await this.ensureConnection();
+    const {locationId, boxId} = this.connection.config;
 
     const queryParams = queryString.stringify({
       fromDate: moment(fromDate).format('YYYY-MM-DD'),
       toDate: moment(toDate).format('YYYY-MM-DD'),
-      location,
+      location:locationId,
+      coach: undefined,
+      schedule: undefined
     });
 
     const {data} = await conn.serverRequest(
-      `https://api.arboxapp.com/index.php/api/v1/rangeSchedule/${this.connection.config.boxId}?${queryParams}`,
+      `https://api.arboxapp.com/index.php/api/v1/rangeSchedule/${boxId}?${queryParams}`,
       'GET'
     );
     return data;

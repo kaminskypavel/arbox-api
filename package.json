@@ -8,7 +8,7 @@
   "license": "ISC",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev src/dev.ts",
+    "dev": "ts-node-dev --respawn --rs src/dev.ts",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "lint:eslint": "eslint src/**/*.ts --fix",
     "lint:prettier": "prettier --config .prettierrc --write src/**/*.{ts,js,json}",

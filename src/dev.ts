@@ -6,20 +6,22 @@ config();
 (async () => {
   const {
     ARBOX_BOX_ID = '',
+    ARBOX_LOCATION_ID = '',
     ARBOX_BOX_NAME = '',
     ARBOX_SESSION_JWT = '',
     ARBOX_EMAIL = '',
-    ARBOX_PASSWORD = '',
+    ARBOX_PASSWORD = ''
   } = process.env;
 
   const arbox = new ArBoxApp(
     Number(ARBOX_BOX_ID),
     ARBOX_BOX_NAME,
+    Number(ARBOX_LOCATION_ID),
     ARBOX_SESSION_JWT,
     ARBOX_EMAIL,
-    ARBOX_PASSWORD,
+    ARBOX_PASSWORD
   );
 
-  const res = await arbox.getMembersProperties();
+  const res = await arbox.getLessons(new Date(), new Date());
   console.log(res);
 })();
