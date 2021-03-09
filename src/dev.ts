@@ -6,8 +6,8 @@ config();
 (async () => {
   const {
     ARBOX_BOX_ID = '',
-    ARBOX_LOCATION_ID = '',
     ARBOX_BOX_NAME = '',
+    ARBOX_LOCATION_ID = '',
     ARBOX_SESSION_JWT = '',
     ARBOX_EMAIL = '',
     ARBOX_PASSWORD = ''
@@ -22,6 +22,6 @@ config();
     ARBOX_PASSWORD
   );
 
-  const res = await arbox.getLessons(new Date(), new Date());
+  const res = await arbox.getLessonMembers(6704016);
   console.log(res);
 })();

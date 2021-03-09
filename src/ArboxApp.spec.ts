@@ -7,6 +7,7 @@ describe('ArBoxApp', () => {
   const {
     ARBOX_BOX_ID="",
     ARBOX_BOX_NAME = '',
+    ARBOX_LOCATION_ID = '',
     ARBOX_SESSION_JWT = '',
     ARBOX_EMAIL="",
     ARBOX_PASSWORD="",
@@ -14,6 +15,7 @@ describe('ArBoxApp', () => {
   const arbox = new ArBoxApp(
     Number(ARBOX_BOX_ID),
     ARBOX_BOX_NAME,
+    Number(ARBOX_LOCATION_ID),
     ARBOX_SESSION_JWT,
     ARBOX_EMAIL,
     ARBOX_PASSWORD
