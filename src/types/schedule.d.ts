@@ -31,6 +31,8 @@ export declare module Schedule {
     day_of_week: number;
   }
 
+
+
   export interface Attendance {
     id: number;
     category: string;
@@ -39,20 +41,36 @@ export declare module Schedule {
     checkedIn: number;
   }
 
-  export interface Member {
+  export interface RegisteredPerson {
+    is_aggregator?: any;
+    id: number;
+    schedule_fk: number;
+    membership_user_fk?: any;
+    checked_in: number;
     user_fk?: any;
     lead_fk: number;
-    registeredDate: string;
-    cancelledDate?: any;
-    cancelledBy?: any;
+    created_at: string;
+    updated_at: string;
+    deleted_at?: any;
+    cancelled_by?: any;
+    late_cancellation: number;
     image?: any;
     first_name: string;
     last_name: string;
-    membershipType?: any;
+    phone: string;
+    epidemic_statement?: any;
+    membership_type_name?: any;
+    user_total_debt?: any;
+    end?: any;
+    image_public_id_cloudinary?: any;
+    birthday?: any;
+    active?: any;
+    full_path_image_user: string;
+    client_phone: string;
   }
 
   export interface LessonMembers {
-    registered: Member[];
-    cancelled: Member[];
+    registered: RegisteredPerson[];
+    cancelled: RegisteredPerson[];
   }
 }
